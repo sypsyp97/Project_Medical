@@ -6,3 +6,5 @@ code_medical/data/
 *.zip
 *.tar.gz
 __pycache__/
+.claude/
+data/
