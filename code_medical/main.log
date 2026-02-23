@@ -1,0 +1,80 @@
+nohup: ignoring input
+Global Seed set to 2025
+[NIHChestXrayDataset] Loaded 14536 images across 6 classes
+  Class 0 (No Finding): 3000 images
+  Class 1 (Atelectasis): 3000 images
+  Class 2 (Cardiomegaly): 856 images
+  Class 3 (Effusion): 3000 images
+  Class 4 (Infiltration): 3000 images
+  Class 5 (Mass): 1680 images
+[NIHChestXrayDataset] Loaded 16264 images across 6 classes
+  Class 0 (No Finding): 12113 images
+  Class 1 (Atelectasis): 843 images
+  Class 2 (Cardiomegaly): 238 images
+  Class 3 (Effusion): 830 images
+  Class 4 (Infiltration): 1782 images
+  Class 5 (Mass): 458 images
+<frozen importlib._bootstrap_external>:1184: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/opt/conda/lib/python3.10/site-packages/httpx/_transports/default.py", line 127, in __iter__
+    for part in self._httpcore_stream:
+  File "/opt/conda/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py", line 407, in __iter__
+    raise exc from None
+  File "/opt/conda/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py", line 403, in __iter__
+    for part in self._stream:
+  File "/opt/conda/lib/python3.10/site-packages/httpcore/_sync/http11.py", line 342, in __iter__
+    raise exc
+  File "/opt/conda/lib/python3.10/site-packages/httpcore/_sync/http11.py", line 334, in __iter__
+    for chunk in self._connection._receive_response_body(**kwargs):
+  File "/opt/conda/lib/python3.10/site-packages/httpcore/_sync/http11.py", line 203, in _receive_response_body
+    event = self._receive_event(timeout=timeout)
+  File "/opt/conda/lib/python3.10/site-packages/httpcore/_sync/http11.py", line 213, in _receive_event
+    with map_exceptions({h11.RemoteProtocolError: RemoteProtocolError}):
+  File "/opt/conda/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/opt/conda/lib/python3.10/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.RemoteProtocolError: peer closed connection without sending complete message body (received 20799401 bytes, expected 221345538)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/data/medical_project/code_medical/main.py", line 216, in <module>
+    main()
+  File "/data/medical_project/code_medical/main.py", line 106, in main
+    mvae = load_medvae(device, model_name=args.medvae_model)
+  File "/data/medical_project/code_medical/ea/utils.py", line 31, in load_medvae
+    mvae = MVAE(model_name=model_name, modality="xray")
+  File "/opt/conda/lib/python3.10/site-packages/medvae/medvae_main.py", line 35, in __init__
+    self.model, self.transform = create_model_and_transform(
+  File "/opt/conda/lib/python3.10/site-packages/medvae/utils/factory.py", line 157, in create_model_and_transform
+    ckpt_fpath = download_model_weights(FILE_DICT_ASSOCIATIONS[model_name]["ckpt"])
+  File "/opt/conda/lib/python3.10/site-packages/medvae/utils/factory.py", line 46, in download_model_weights
+    fpath = hf_hub_download(repo_id=HF_REPO_PATH, filename=hfpath)
+  File "/opt/conda/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/opt/conda/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1032, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+  File "/opt/conda/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1248, in _hf_hub_download_to_cache_dir
+    _download_to_tmp_and_move(
+  File "/opt/conda/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1888, in _download_to_tmp_and_move
+    http_get(
+  File "/opt/conda/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/opt/conda/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 462, in http_get
+    for chunk in response.iter_bytes(chunk_size=constants.DOWNLOAD_CHUNK_SIZE):
+  File "/opt/conda/lib/python3.10/site-packages/httpx/_models.py", line 897, in iter_bytes
+    for raw_bytes in self.iter_raw():
+  File "/opt/conda/lib/python3.10/site-packages/httpx/_models.py", line 951, in iter_raw
+    for raw_stream_bytes in self.stream:
+  File "/opt/conda/lib/python3.10/site-packages/httpx/_client.py", line 153, in __iter__
+    for chunk in self._stream:
+  File "/opt/conda/lib/python3.10/site-packages/httpx/_transports/default.py", line 126, in __iter__
+    with map_httpcore_exceptions():
+  File "/opt/conda/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/opt/conda/lib/python3.10/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.RemoteProtocolError: peer closed connection without sending complete message body (received 20799401 bytes, expected 221345538)

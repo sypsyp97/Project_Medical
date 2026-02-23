@@ -1,0 +1,8 @@
+# 忽略 code_medical 下的 data 文件夹（及其所有碎文件）
+code_medical/data/
+
+# 习惯性忽略其他可能的大文件
+*.pth
+*.zip
+*.tar.gz
+__pycache__/
