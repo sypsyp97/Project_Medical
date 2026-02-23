@@ -13,7 +13,7 @@ class EvalCfg:
     num_classes: int = 6
     steps: int = 500
     batch_size: int = 256         # A100 80GB can handle 224x224 grayscale at this batch size
-    train_lr: float = 0.01
+    train_lr: float = 1e-3          # AdamW typical LR (was 0.01 for SGD)
 
     # Robustness score coefficients
     alpha: float = 1.0   # CVaR weight

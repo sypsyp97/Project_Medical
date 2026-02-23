@@ -8,3 +8,4 @@ code_medical/data/
 __pycache__/
 .claude/
 data/
+.vscode/

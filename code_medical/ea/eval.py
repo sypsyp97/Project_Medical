@@ -75,9 +75,10 @@ def evaluate_individual(
         for seed in eval_cfg.seeds:
             set_seed(seed)
             model = build_model(mname, num_classes=eval_cfg.num_classes).to(device)
+            model.compile()
             model.train()
-            optimizer = torch.optim.SGD(
-                model.parameters(), lr=eval_cfg.train_lr, momentum=0.9
+            optimizer = torch.optim.AdamW(
+                model.parameters(), lr=eval_cfg.train_lr, weight_decay=0.01
             )
             # Weighted loss to handle class imbalance
             criterion = nn.CrossEntropyLoss(weight=class_weights)
@@ -96,12 +97,13 @@ def evaluate_individual(
                     x = (x - mean_tensor) / std_tensor
 
                 optimizer.zero_grad()
-                output = model(x)
-                loss = criterion(output, y)
+                with torch.amp.autocast('cuda', dtype=torch.bfloat16):
+                    output = model(x)
+                    loss = criterion(output, y)
                 loss.backward()
                 optimizer.step()
 
-            # Evaluate with AUROC
+            # Evaluate with AUROC (bf16 inference too)
             auc_val = auroc(model, test_loader, device, eval_cfg.num_classes)
 
             # Normalize score: (auc - 0.5) / (upper_auc - 0.5)

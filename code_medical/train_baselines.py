@@ -102,11 +102,11 @@ def auroc(model: nn.Module, loader: DataLoader, device, num_classes: int = 6) ->
     all_probs = []
     all_labels = []
 
-    with torch.no_grad():
+    with torch.no_grad(), torch.amp.autocast('cuda', dtype=torch.bfloat16):
         for x, y in loader:
             x = x.to(device, non_blocking=True)
             logits = model(x)
-            probs = torch.softmax(logits, dim=1).cpu().numpy()
+            probs = torch.softmax(logits, dim=1).float().cpu().numpy()
             all_probs.append(probs)
             all_labels.append(y.numpy())
 
