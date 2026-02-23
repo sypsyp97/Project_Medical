@@ -1,6 +1,7 @@
 #!/bin/bash -l
 #SBATCH --job-name=ea_medical
 #SBATCH --gres=gpu:a100:8
+#SBATCH -C a100_80
 #SBATCH --time=24:00:00
 #SBATCH --export=NONE
 #SBATCH --signal=B:USR1@300
