@@ -11,6 +11,10 @@
 
 unset SLURM_EXPORT_ENV
 
+# ── Internet access on compute nodes (FAU proxy) ──
+export http_proxy=http://proxy.nhr.fau.de:80
+export https_proxy=http://proxy.nhr.fau.de:80
+
 # ── Paths ──
 PROJECT_DIR=/home/woody/iwi5/iwi5184h/Project_Medical
 CODE_DIR=${PROJECT_DIR}/code_medical
